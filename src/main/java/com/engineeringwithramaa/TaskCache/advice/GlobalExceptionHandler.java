@@ -1,15 +1,21 @@
 package com.engineeringwithramaa.TaskCache.advice;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.engineeringwithramaa.TaskCache.exception.TaskNotFoundException;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(TaskNotFoundException.class)
-    public void handleTaskNotFoundException() {
+    public Map<String, String> handleTaskNotFoundException(TaskNotFoundException ex) {
+        Map<String, String> errorMap = new HashMap<>();
+        errorMap.put("errorMessage", ex.getMessage());
+        return errorMap;
     }
 }

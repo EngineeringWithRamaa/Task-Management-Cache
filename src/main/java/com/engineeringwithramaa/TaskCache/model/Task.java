@@ -5,7 +5,6 @@ import org.springframework.data.annotation.Id;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.UUID;
-
 public class Task implements Serializable {
 
     @Id
@@ -16,6 +15,9 @@ public class Task implements Serializable {
     private Boolean completed;
 
     private String description;
+
+    public Task() {
+    }
 
     public Task(String description) {
         this.id = UUID.randomUUID().toString().substring(0, 6);
